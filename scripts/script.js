@@ -90,7 +90,7 @@ function clearEntry() {
 		opChain = opChain.substring(0, opChain.length - 1);
 	}
 	else {
-
+		opChain = opChain.substring(0, opChain.lastIndexOf(opChain.match(/[0-9|.]*$/)));
 	}
 	displayOpChain();
 }
