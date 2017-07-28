@@ -40,11 +40,10 @@ function initButtonListeners() {
 				addDigit(0);
 				break;
 			case "ac":
-				opchain = "";
-				console.log(opchain);
+				allClear();
 				break;
 			case "ce":
-				console.log("ce");
+				clearEntry();
 				break;
 			case "divide":
 				addOp("÷");
@@ -70,12 +69,25 @@ function initButtonListeners() {
 
 function addDigit(value) {
 	opchain += value;
-	console.log(opchain);
+	displayOpchain();
 }
 
 function addOp(value) {
 	if(/[0-9]/.test(opchain[opchain.length - 1])) {
 		opchain += value;
-		console.log(opchain);
+		displayOpchain();
 	}
+}
+
+function allClear() {
+	opchain = "";
+	displayOpchain();
+}
+
+function clearEntry() {
+
+}
+
+function displayOpchain() {
+	console.log(opchain);
 }
