@@ -10,34 +10,34 @@ function initButtonListeners() {
 	$("button").click(function(event) {
 		switch($(event.target).attr("id")) {
 			case "one": 
-				addOpchain(1);
+				addDigit(1);
 				break;
 			case "two": 
-				addOpchain(2);
+				addDigit(2);
 				break;
 			case "three": 
-				addOpchain(3); 
+				addDigit(3); 
 				break;
 			case "four": 
-				addOpchain(4); 
+				addDigit(4); 
 				break;
 			case "five": 
-				addOpchain(5);
+				addDigit(5);
 				break;
 			case "six": 
-				addOpchain(6); 
+				addDigit(6); 
 				break;
 			case "seven": 
-				addOpchain(7);
+				addDigit(7);
 				break;
 			case "eight": 
-				addOpchain(8);
+				addDigit(8);
 				break;
 			case "nine": 
-				addOpchain(9);
+				addDigit(9);
 				break;
 			case "zero": 
-				addOpchain(0);
+				addDigit(0);
 				break;
 			case "ac":
 				opchain = "";
@@ -47,28 +47,35 @@ function initButtonListeners() {
 				console.log("ce");
 				break;
 			case "divide":
-				addOpchain("÷");
+				addOp("÷");
 				break;
 			case "multiply":
-				addOpchain("x");
+				addOp("x");
 				break;
 			case "minus":
-				addOpchain("-");
+				addOp("-");
 				break;
 			case "add":
-				addOpchain("+");
+				addOp("+");
 				break;
 			case "equals":
-				addOpchain("=");
+				addOp("=");
 				break;
 			case "decimal":
-				addOpchain(".");
+				addOp(".");
 				break;
 		}
 	});
 }
 
-function addOpchain(value) {
+function addDigit(value) {
 	opchain += value;
 	console.log(opchain);
+}
+
+function addOp(value) {
+	if(/[0-9]/.test(opchain[opchain.length - 1])) {
+		opchain += value;
+		console.log(opchain);
+	}
 }
