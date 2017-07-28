@@ -3,7 +3,7 @@ $(function() {
 	initButtonListeners();
 });
 
-var opchain = "";
+var opChain = "";
 
 
 function initButtonListeners() {
@@ -64,30 +64,37 @@ function initButtonListeners() {
 				addOp(".");
 				break;
 		}
+
 	});
 }
 
 function addDigit(value) {
-	opchain += value;
-	displayOpchain();
+	opChain += value;
+	displayOpChain();
 }
 
 function addOp(value) {
-	if(/[0-9]/.test(opchain[opchain.length - 1])) {
-		opchain += value;
-		displayOpchain();
+	if(/[0-9]/.test(opChain[opChain.length - 1])) {
+		opChain += value;
+		displayOpChain();
 	}
 }
 
 function allClear() {
-	opchain = "";
-	displayOpchain();
+	opChain = "";
+	displayOpChain();
 }
 
 function clearEntry() {
+	if(/[^0-9]/.test(opChain[opChain.length - 1])) {
+		opChain = opChain.substring(0, opChain.length - 1);
+	}
+	else {
 
+	}
+	displayOpChain();
 }
 
-function displayOpchain() {
-	console.log(opchain);
+function displayOpChain() {
+	console.log(opChain);
 }
