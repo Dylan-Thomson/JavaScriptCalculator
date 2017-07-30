@@ -104,9 +104,12 @@ function getTotal() {
 	}
 }
 
+// Clear everything
 function allClear() {
 	opChain = "";
 	displayOpChain();
+	output = "";
+	displayOutput(0);
 }
 
 function clearEntry() {
