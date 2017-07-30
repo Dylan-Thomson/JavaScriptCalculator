@@ -57,7 +57,7 @@ function initButtonListeners() {
 				addOp("+");
 				break;
 			case "equals":
-				addOp("=");
+				eval();
 				break;
 			case "decimal":
 				addOp(".");
@@ -102,4 +102,33 @@ function clearEntry() {
 
 function displayOpChain() {
 	console.log(opChain);
+}
+
+function displayOutput(value) {
+	console.log(value);
+}
+
+function eval() {
+	var numbers = opChain.split(/[^0-9|.]/);
+	var operands = opChain.split(/[0-9|.]/).filter(function(el) {return el.length != 0});
+	total = Number(numbers.shift());
+
+	for(var i = 0; i < operands.length; i++) {
+		switch(operands[i]) {
+			case "+":
+				total += Number(numbers[i]);
+				break;
+			case "-":
+				total -= Number(numbers[i]);
+				break;
+			case "x":
+				total *= Number(numbers[i]);
+				break;
+			case "÷":
+				total /= Number(numbers[i]);
+				break;
+		}
+	}
+	displayOutput(total);
+	displayOpChain();
 }
