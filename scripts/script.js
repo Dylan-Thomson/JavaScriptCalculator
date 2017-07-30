@@ -78,8 +78,12 @@ function addDigit(value) {
 }
 
 function addOp(value) {
+	if(opChain.match(/=/)) {
+		opChain = opChain.substring(opChain.match(/=/)["index"] + 1);
+		console.log(opChain);
+	}
 	if(/[0-9]/.test(opChain[opChain.length - 1])) {
-		if(opChain.match(/[^0-9]/) === null) {
+		if(!opChain.match(/[^0-9]/)) {
 			opChain += value;
 			displayOpChain();
 		}
