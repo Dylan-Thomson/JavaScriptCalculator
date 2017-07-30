@@ -100,8 +100,14 @@ function clearEntry() {
 	displayOpChain();
 }
 
-function displayOpChain() {
-	console.log(opChain);
+function displayOpChain(total) {
+	if(total) {
+		opChain += "=" + total;
+		console.log(opChain);
+	}
+	else {
+		console.log(opChain);
+	}
 }
 
 function displayOutput(value) {
@@ -111,7 +117,7 @@ function displayOutput(value) {
 function eval() {
 	var numbers = opChain.split(/[^0-9|.]/);
 	var operands = opChain.split(/[0-9|.]/).filter(function(el) {return el.length != 0});
-	total = Number(numbers.shift());
+	var total = Number(numbers.shift());
 
 	for(var i = 0; i < operands.length; i++) {
 		switch(operands[i]) {
@@ -130,5 +136,5 @@ function eval() {
 		}
 	}
 	displayOutput(total);
-	displayOpChain();
+	displayOpChain(total);
 }
