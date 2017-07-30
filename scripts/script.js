@@ -5,7 +5,6 @@ $(function() {
 
 var opChain = "";
 
-
 function initButtonListeners() {
 	$("button").click(function(event) {
 		switch($(event.target).attr("id")) {
@@ -75,8 +74,14 @@ function addDigit(value) {
 
 function addOp(value) {
 	if(/[0-9]/.test(opChain[opChain.length - 1])) {
-		opChain += value;
-		displayOpChain();
+		if(opChain.match(/[^0-9]/) === null) {
+			opChain += value;
+			displayOpChain();
+		}
+		else if(opChain.split("").reverse().join("").match(/[^0-9]/)[0] !== "." || value !== ".") {
+			opChain += value;
+			displayOpChain();
+		}
 	}
 }
 
