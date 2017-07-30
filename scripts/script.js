@@ -60,7 +60,7 @@ function initButtonListeners() {
 				eval();
 				break;
 			case "decimal":
-				addOp(".");
+				addDecimal();
 				break;
 		}
 
@@ -78,19 +78,29 @@ function addDigit(value) {
 }
 
 function addOp(value) {
+	getTotal();
+	if(/[0-9]/.test(opChain[opChain.length - 1])) {
+		opChain += value;
+		displayOpChain();
+	}
+}
+
+function addDecimal() {
+	getTotal();
+	if(!opChain.match(/[^0-9]/)) {
+			opChain += ".";
+			displayOpChain();
+	}
+	else if(opChain.split("").reverse().join("").match(/[^0-9]/)[0] !== ".") {
+		opChain += ".";
+		displayOpChain();
+	}
+}
+
+// Check if there is a total from previous calculation
+function getTotal() {
 	if(opChain.match(/=/)) {
 		opChain = opChain.substring(opChain.match(/=/)["index"] + 1);
-		console.log(opChain);
-	}
-	if(/[0-9]/.test(opChain[opChain.length - 1])) {
-		if(!opChain.match(/[^0-9]/)) {
-			opChain += value;
-			displayOpChain();
-		}
-		else if(opChain.split("").reverse().join("").match(/[^0-9]/)[0] !== "." || value !== ".") {
-			opChain += value;
-			displayOpChain();
-		}
 	}
 }
 
