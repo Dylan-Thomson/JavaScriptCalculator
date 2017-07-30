@@ -78,7 +78,9 @@ function addDigit(value) {
 }
 
 function addOp(value) {
-	getTotal();
+	if(opChain.match(/=/)) {
+		opChain = opChain.substring(opChain.match(/=/)["index"] + 1);
+	}
 	if(/[0-9]/.test(opChain[opChain.length - 1])) {
 		opChain += value;
 		displayOpChain();
@@ -86,22 +88,16 @@ function addOp(value) {
 }
 
 function addDecimal() {
-	getTotal();
+	if(opChain.match(/=/)) {
+		opChain = ".";
+	}
 	if(!opChain.match(/[^0-9]/)) {
 			opChain += ".";
-			displayOpChain();
 	}
 	else if(opChain.split("").reverse().join("").match(/[^0-9]/)[0] !== ".") {
 		opChain += ".";
-		displayOpChain();
 	}
-}
-
-// Check if there is a total from previous calculation
-function getTotal() {
-	if(opChain.match(/=/)) {
-		opChain = opChain.substring(opChain.match(/=/)["index"] + 1);
-	}
+	displayOpChain();
 }
 
 // Clear everything
