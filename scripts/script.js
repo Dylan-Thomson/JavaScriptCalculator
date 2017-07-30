@@ -68,7 +68,12 @@ function initButtonListeners() {
 }
 
 function addDigit(value) {
-	opChain += value;
+	if(opChain.match(/=/)) {
+		opChain = value.toString();
+	}
+	else {
+		opChain += value;
+	}
 	displayOpChain();
 }
 
