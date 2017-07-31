@@ -148,8 +148,8 @@ function displayOutput(value) {
 }
 
 function eval() {
-	var numbers = opChain.split(/[\D.]/);
-	var operands = opChain.split(/[\d.]/).filter(function(el) {return el.length != 0});
+	var numbers = opChain.split(/[^0-9|.]/);
+	var operands = opChain.split(/[0-9|.]/).filter(function(el) {return el.length != 0});
 	var total = Number(numbers.shift());
 
 	for(var i = 0; i < operands.length; i++) {
