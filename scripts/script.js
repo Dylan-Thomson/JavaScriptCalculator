@@ -67,8 +67,10 @@ function initButtonListeners() {
 	});
 }
 
+// TODO display current number/operand in output
 function addDigit(value) {
-	if(opChain.match(/=/)) {
+	// Clear previous operation
+	if(/=/.test(opChain)) {
 		opChain = value.toString();
 	}
 	else {
@@ -78,23 +80,28 @@ function addDigit(value) {
 }
 
 function addOp(value) {
-	if(opChain.match(/=/)) {
+	// Get previous total and use for next calculation
+	if(/=/.test(opChain)) {
 		opChain = opChain.substring(opChain.match(/=/)["index"] + 1);
 	}
-	if(/[0-9]/.test(opChain[opChain.length - 1])) {
+	// Add operand if last digit is a number
+	if(/\d/.test(opChain[opChain.length - 1])) {
 		opChain += value;
 		displayOpChain();
 	}
 }
 
 function addDecimal() {
-	if(opChain.match(/=/)) {
+	// Clear previous operation
+	if(/=/.test(opChain)) {
 		opChain = ".";
 	}
-	if(!opChain.match(/[^0-9]/)) {
+	// Add decimal if there are no nondigit characters
+	if(!/\D/.test(opChain)) {
 			opChain += ".";
 	}
-	else if(opChain.split("").reverse().join("").match(/[^0-9]/)[0] !== ".") {
+	// Add decimal if last nondigit character is not a decimal
+	else if(opChain.split("").reverse().join("").match(/\D/)[0] !== ".") {
 		opChain += ".";
 	}
 	displayOpChain();
@@ -108,17 +115,25 @@ function allClear() {
 	displayOutput(0);
 }
 
+
 function clearEntry() {
-	if(/[^0-9]/.test(opChain[opChain.length - 1])) {
+	// Clear equals
+	if(/=/.test(opChain)) {
+		opChain = opChain.substring(0, opChain.match(/=/)["index"]);
+	}
+	// If last char is nondigit, remove it
+	else if(/\D/.test(opChain[opChain.length - 1])) {
 		opChain = opChain.substring(0, opChain.length - 1);
 	}
+	// Else remove last number
 	else {
-		opChain = opChain.substring(0, opChain.lastIndexOf(opChain.match(/[0-9|.]*$/)));
+		opChain = opChain.substring(0, opChain.lastIndexOf(opChain.match(/[\d.]*$/)));
 	}
 	displayOpChain();
 }
 
 function displayOpChain(total) {
+	// Display operation and result
 	if(total) {
 		opChain += "=" + total;
 		console.log(opChain);
@@ -133,8 +148,8 @@ function displayOutput(value) {
 }
 
 function eval() {
-	var numbers = opChain.split(/[^0-9|.]/);
-	var operands = opChain.split(/[0-9|.]/).filter(function(el) {return el.length != 0});
+	var numbers = opChain.split(/[\D.]/);
+	var operands = opChain.split(/[\d.]/).filter(function(el) {return el.length != 0});
 	var total = Number(numbers.shift());
 
 	for(var i = 0; i < operands.length; i++) {
