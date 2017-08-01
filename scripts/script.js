@@ -186,9 +186,7 @@ function eval() {
 				break;
 		}
 	}
-	displayOutput(total);
-	displayOpChain(total);
-}	displayOutput(Number(total.toFixed(5)).toString());
+	displayOutput(Number(total.toFixed(5)).toString());
 	displayOpChain(Number(total.toFixed(5)).toString());
 }
 
