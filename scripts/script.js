@@ -68,7 +68,6 @@ function initButtonListeners() {
 	});
 }
 
-// TODO display current number/operand in output
 function addDigit(value) {
 	// Clear previous operation
 	if(/=/.test(opChain)) {
@@ -99,6 +98,8 @@ function addOp(value) {
 	}
 }
 
+// TODO fix output when adding decimal after operand (x.)
+// TODO Keep decimal in output if number
 function addDecimal() {
 	// Clear previous operation
 	if(/=/.test(opChain)) {
@@ -108,13 +109,14 @@ function addDecimal() {
 	// Add decimal if there are no nondigit characters
 	if(!/\D/.test(opChain)) {
 			opChain += ".";
+			output += ".";
 	}
 	// Add decimal if last nondigit character is not a decimal
 	else if(opChain.split("").reverse().join("").match(/\D/)[0] !== ".") {
 		opChain += ".";
+		output += ".";
 	}
 	displayOpChain();
-	output += ".";
 	displayOutput();
 }
 
@@ -140,6 +142,8 @@ function clearEntry() {
 	else {
 		opChain = opChain.substring(0, opChain.lastIndexOf(opChain.match(/[\d.]*$/)));
 	}
+	output = "";
+	displayOutput();
 	displayOpChain();
 }
 
@@ -147,18 +151,15 @@ function displayOpChain(total) {
 	// Display operation and result
 	if(total) {
 		opChain += "=" + total;
-		console.log("opChain " + opChain);
 	}
-	else {
-		console.log("opChain " + opChain);
-	}
+	$("#operations").text(opChain);
 }
 
 function displayOutput(value) {
 	if(value) {
 		output = value;
 	}
-	console.log("output", output);
+	$("#output").text(output);
 }
 
 function eval() {

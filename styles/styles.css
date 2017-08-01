@@ -12,16 +12,24 @@ input {
 	width: 100%;
 }
 
+p {
+	margin: 0;
+}
+
 .container-fluid {
 	background: blue;
 }
 .row {
-	background: #AAA;
+	/*background: #AAA;*/
 	margin: none;
 
 }
 .col-xs-3, .col-xs-8, .col-xs-4 {
 	padding: 0 0.25em;
+}
+
+.col-xs-12 {
+	padding: 0;
 }
 
 #calc {
@@ -32,4 +40,22 @@ input {
 
 #equals {
 	height: 7em;
+}
+
+#output {
+	text-align: right;
+	font-size: 2em;
+	/*padding: 2em;*/
+}
+
+#operations {
+	text-align: right;
+}
+
+#screen {
+	background: white;
+	min-height: 6em;
+	/*width: 100%;*/
+	border-radius: 1em;
+	padding: 0.5em;
 }
