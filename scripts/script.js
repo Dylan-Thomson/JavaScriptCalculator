@@ -72,6 +72,7 @@ function addDigit(value) {
 	// Clear previous operation
 	if(/=/.test(opChain)) {
 		opChain = value.toString();
+		output = "";
 	}
 	else if(/[x÷+-]/.test(output)) {
 		output = "";
