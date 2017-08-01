@@ -4,6 +4,7 @@ $(function() {
 });
 
 var opChain = "";
+var output = "";
 
 function initButtonListeners() {
 	$("button").click(function(event) {
@@ -73,10 +74,16 @@ function addDigit(value) {
 	if(/=/.test(opChain)) {
 		opChain = value.toString();
 	}
+	else if(/[x÷+-]/.test(output)) {
+		output = "";
+		opChain += value;
+	}
 	else {
 		opChain += value;
 	}
 	displayOpChain();
+	output += value;
+	displayOutput();
 }
 
 function addOp(value) {
@@ -88,12 +95,14 @@ function addOp(value) {
 	if(/\d/.test(opChain[opChain.length - 1])) {
 		opChain += value;
 		displayOpChain();
+		displayOutput(value);
 	}
 }
 
 function addDecimal() {
 	// Clear previous operation
 	if(/=/.test(opChain)) {
+		output = "";
 		opChain = ".";
 	}
 	// Add decimal if there are no nondigit characters
@@ -105,6 +114,8 @@ function addDecimal() {
 		opChain += ".";
 	}
 	displayOpChain();
+	output += ".";
+	displayOutput();
 }
 
 // Clear everything
@@ -136,15 +147,18 @@ function displayOpChain(total) {
 	// Display operation and result
 	if(total) {
 		opChain += "=" + total;
-		console.log(opChain);
+		console.log("opChain " + opChain);
 	}
 	else {
-		console.log(opChain);
+		console.log("opChain " + opChain);
 	}
 }
 
 function displayOutput(value) {
-	console.log(value);
+	if(value) {
+		output = value;
+	}
+	console.log("output", output);
 }
 
 function eval() {
