@@ -167,28 +167,30 @@ function displayOutput(value) {
 }
 
 function eval() {
-	var numbers = opChain.split(/[^0-9|.]/);
-	var operands = opChain.split(/[0-9|.]/).filter(function(el) {return el.length != 0});
-	var total = Number(numbers.shift());
+	if(!/=/.test(opChain)) {
+		var numbers = opChain.split(/[^0-9|.]/);
+		var operands = opChain.split(/[0-9|.]/).filter(function(el) {return el.length != 0});
+		var total = Number(numbers.shift());
 
-	for(var i = 0; i < operands.length; i++) {
-		switch(operands[i]) {
-			case "+":
-				total += Number(numbers[i]);
-				break;
-			case "-":
-				total -= Number(numbers[i]);
-				break;
-			case "x":
-				total *= Number(numbers[i]);
-				break;
-			case "÷":
-				total /= Number(numbers[i]);
-				break;
+		for(var i = 0; i < operands.length; i++) {
+			switch(operands[i]) {
+				case "+":
+					total += Number(numbers[i]);
+					break;
+				case "-":
+					total -= Number(numbers[i]);
+					break;
+				case "x":
+					total *= Number(numbers[i]);
+					break;
+				case "÷":
+					total /= Number(numbers[i]);
+					break;
+			}
 		}
+		displayOutput(Number(total.toFixed(5)).toString());
+		displayOpChain(Number(total.toFixed(5)).toString());
 	}
-	displayOutput(Number(total.toFixed(5)).toString());
-	displayOpChain(Number(total.toFixed(5)).toString());
 }
 
 $("#test1").on("click", function(event) {
