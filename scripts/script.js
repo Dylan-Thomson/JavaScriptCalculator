@@ -185,4 +185,23 @@ function eval() {
 	}
 	displayOutput(total);
 	displayOpChain(total);
+}	displayOutput(Number(total.toFixed(5)).toString());
+	displayOpChain(Number(total.toFixed(5)).toString());
 }
+
+$("#test1").on("click", function(event) {
+	$("#one").click();
+	$("#decimal").click();
+	$("#three").click();
+	$("#minus").click();
+	$("#decimal").click();
+	$("#four").click();
+	$("#five").click();
+	$("#add").click();
+	$("#six").click();
+	$("#seven").click();
+	$("#equals").click();
+	$("#minus").click();
+	$("#eight").click();
+	$("#equals").click();
+});
