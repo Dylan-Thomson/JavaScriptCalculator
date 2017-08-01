@@ -98,12 +98,10 @@ function addOp(value) {
 	}
 }
 
-// TODO fix output when adding decimal after operand (x.)
-// TODO Keep decimal in output if number
 function addDecimal() {
 	// Clear previous operation
 	if(/=/.test(opChain)) {
-		output = "";
+		output = ".";
 		opChain = ".";
 	}
 	// Add decimal if there are no nondigit characters
@@ -113,8 +111,13 @@ function addDecimal() {
 	}
 	// Add decimal if last nondigit character is not a decimal
 	else if(opChain.split("").reverse().join("").match(/\D/)[0] !== ".") {
+		if(/[x÷+-]/.test(output)) {
+			output = ".";
+		}
+		else {
+			output += ".";
+		}
 		opChain += ".";
-		output += ".";
 	}
 	displayOpChain();
 	displayOutput();
