@@ -132,7 +132,6 @@ function allClear() {
 	displayOutput(0);
 }
 
-
 function clearEntry() {
 	// Clear equals
 	if(/=/.test(opChain)) {
@@ -146,7 +145,7 @@ function clearEntry() {
 	else {
 		opChain = opChain.substring(0, opChain.lastIndexOf(opChain.match(/[\d.]*$/)));
 	}
-	output = "";
+	output = "&nbsp;";
 	displayOutput();
 	displayOpChain();
 }
@@ -163,9 +162,10 @@ function displayOutput(value) {
 	if(value) {
 		output = value;
 	}
-	$("#output").text(output);
+	$("#output").html(output);
 }
 
+// TODO if user hits equals multiple times, repeat last operation
 function eval() {
 	if(!/=/.test(opChain)) {
 		var numbers = opChain.split(/[^0-9|.]/);
