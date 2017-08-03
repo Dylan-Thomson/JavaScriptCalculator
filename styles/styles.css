@@ -12,9 +12,6 @@ p {
 	margin: 0;
 }
 
-.container-fluid {
-	text-align: center;
-}
 .row {
 	margin: none;
 
@@ -30,17 +27,16 @@ p {
 .vertical-center {
   min-height: 100%;
   min-height: 100vh;
-
   display: flex;
   align-items: center;
 }
 
 #calc {
-	margin: 5em auto;
+	margin: auto;
 	padding: 3em;
 	background: gray;
-	min-width: 300px;
-	display: inline-block;
+	width: 300px;
+	border-radius: 1em;
 }
 
 #equals {
@@ -59,6 +55,6 @@ p {
 #screen {
 	background: white;
 	min-height: 6em;
-	border-radius: 1em;
 	padding: 0.5em;
+	margin-bottom: 2em;
 }
