@@ -69,6 +69,9 @@ function initButtonListeners() {
 }
 
 function addDigit(value) {
+	if(output === "DIGIT LIMIT MET") {
+		allClear();
+	}
 	// Clear previous operation
 	if(/=/.test(opChain)) {
 		opChain = value.toString();
@@ -87,6 +90,9 @@ function addDigit(value) {
 }
 
 function addOp(value) {
+	if(output === "DIGIT LIMIT MET") {
+		allClear();
+	}
 	// Get previous total and use for next calculation
 	if(/=/.test(opChain)) {
 		opChain = opChain.substring(opChain.match(/=/)["index"] + 1);
@@ -100,6 +106,9 @@ function addOp(value) {
 }
 
 function addDecimal() {
+	if(output === "DIGIT LIMIT MET") {
+		allClear();
+	}
 	// Clear previous operation
 	if(/=/.test(opChain)) {
 		output = ".";
@@ -155,12 +164,22 @@ function displayOpChain(total) {
 	if(total) {
 		opChain += "=" + total;
 	}
+	if(opChain.length > 29) {
+		output = "DIGIT LIMIT MET";
+		opChain = "";
+		displayOutput();
+	}
 	$("#operations").text(opChain);
 }
 
 function displayOutput(value) {
 	if(value) {
 		output = value;
+	}
+	if(output.length > 15) {
+		output = "DIGIT LIMIT MET";
+		opChain = "";
+		displayOpChain();
 	}
 	$("#output").html(output);
 }
