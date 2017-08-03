@@ -166,12 +166,12 @@ function displayOutput(value) {
 }
 
 // TODO if user hits equals multiple times, repeat last operation
+// TODO represent numbers like .000002 as 2E-7
 function eval() {
 	if(!/=/.test(opChain)) {
 		var numbers = opChain.split(/[^0-9|.]/);
 		var operands = opChain.split(/[0-9|.]/).filter(function(el) {return el.length != 0});
 		var total = Number(numbers.shift());
-
 		for(var i = 0; i < operands.length; i++) {
 			switch(operands[i]) {
 				case "+":
@@ -191,21 +191,5 @@ function eval() {
 		displayOutput(Number(total.toFixed(5)).toString());
 		displayOpChain(Number(total.toFixed(5)).toString());
 	}
-}
 
-$("#test1").on("click", function(event) {
-	$("#one").click();
-	$("#decimal").click();
-	$("#three").click();
-	$("#minus").click();
-	$("#decimal").click();
-	$("#four").click();
-	$("#five").click();
-	$("#add").click();
-	$("#six").click();
-	$("#seven").click();
-	$("#equals").click();
-	$("#minus").click();
-	$("#eight").click();
-	$("#equals").click();
-});
+}
