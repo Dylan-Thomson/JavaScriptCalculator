@@ -191,5 +191,4 @@ function eval() {
 		displayOutput(Number(total.toFixed(5)).toString());
 		displayOpChain(Number(total.toFixed(5)).toString());
 	}
-
 }

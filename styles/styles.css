@@ -13,6 +13,7 @@ p {
 }
 
 .container-fluid {
+	text-align: center;
 }
 .row {
 	margin: none;
@@ -26,11 +27,20 @@ p {
 	padding: 0;
 }
 
+.vertical-center {
+  min-height: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+}
+
 #calc {
 	margin: 5em auto;
 	padding: 3em;
 	background: gray;
-	max-width: 300px;
+	min-width: 300px;
+	display: inline-block;
 }
 
 #equals {
@@ -51,5 +61,4 @@ p {
 	min-height: 6em;
 	border-radius: 1em;
 	padding: 0.5em;
-	overflow: hidden;
 }
