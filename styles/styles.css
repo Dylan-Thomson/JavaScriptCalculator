@@ -1,7 +1,14 @@
 body {
 	font-family: 'Orbitron', sans-serif;
-	background: #83CBE1;
 	color: #292D39;
+	background: #83CBE1;
+	background: -moz-linear-gradient(45deg, #292D39 0%, #83CBE1 100%); /* ff3.6+ */
+	background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, #292D39), color-stop(100%, #83CBE1)); /* safari4+,chrome */
+	background: -webkit-linear-gradient(45deg, #292D39 0%, #83CBE1 100%); /* safari5.1+,chrome10+ */
+	background: -o-linear-gradient(45deg, #292D39 0%, #83CBE1 100%); /* opera 11.10+ */
+	background: -ms-linear-gradient(45deg, #292D39 0%, #83CBE1 100%); /* ie10+ */
+	background: linear-gradient(45deg, #292D39 0%, #83CBE1 100%); /* w3c */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#83CBE1', endColorstr='#292D39',GradientType=1 ); /* ie6-9 */
 }
 
 h1 {
@@ -88,9 +95,9 @@ a:hover, a:active {
 	background: #292D39;
 	width: 300px;
 	border-radius: 1em;
-	border-bottom: .5em solid #1B2134;
+	border-bottom: .25em solid #1B2134;
 	border-right: .20em solid #1B2134;
-	border-left: .20em solid #1B2134;
+	/*border-left: .20em solid #1B2134;*/
 }
 
 #equals {
