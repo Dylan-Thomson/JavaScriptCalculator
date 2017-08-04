@@ -95,8 +95,8 @@ a:hover, a:active {
 	background: #292D39;
 	width: 300px;
 	border-radius: 1em;
-	border-bottom: .25em solid #1B2134;
-	border-right: .20em solid #1B2134;
+	border-bottom: .5em solid #1B2134;
+	border-right: .25em solid #1B2134;
 	/*border-left: .20em solid #1B2134;*/
 
 	box-shadow: 10px 10px 20px -2px rgba(27,33,52,1);
