@@ -115,9 +115,14 @@ a:hover, a:active {
 }
 
 #screen {
-	background: #F6F9F8;
+	font-family: 'Orbitron', sans-serif;
+	background: #E3E5E3;
 	min-height: 6em;
 	padding: 0.5em;
 	margin-bottom: 2em;
 	border-radius: 1em;
+	border-top: .25em solid #C2CAC2;
+	border-right: .20em solid #C2CAC2;
+	border-left: .20em solid #C2CAC2;
+
 }
