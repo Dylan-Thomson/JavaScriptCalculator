@@ -27,6 +27,28 @@ p {
 	margin: 0;
 }
 
+
+footer {
+	color: #F6F9F8;
+	margin-top: 1em;
+	margin-bottom: -2em;
+	font-family: 'Orbitron', sans-serif;
+}
+
+a {
+	color: #DF614F;
+
+}
+
+a:hover, a:active {
+	color: #C83B28;
+	text-decoration: none;
+}
+
+ a:visited {
+ 	color: #DF614F;
+ }
+
 .row {
 	margin: none;
 
