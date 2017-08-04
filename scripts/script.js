@@ -8,63 +8,24 @@ var output = "";
 
 function initButtonListeners() {
 	$("button").click(function(event) {
-		switch($(event.target).attr("id")) {
-			case "one": 
-				addDigit(1);
-				break;
-			case "two": 
-				addDigit(2);
-				break;
-			case "three": 
-				addDigit(3); 
-				break;
-			case "four": 
-				addDigit(4); 
-				break;
-			case "five": 
-				addDigit(5);
-				break;
-			case "six": 
-				addDigit(6); 
-				break;
-			case "seven": 
-				addDigit(7);
-				break;
-			case "eight": 
-				addDigit(8);
-				break;
-			case "nine": 
-				addDigit(9);
-				break;
-			case "zero": 
-				addDigit(0);
-				break;
-			case "ac":
-				allClear();
-				break;
-			case "ce":
-				clearEntry();
-				break;
-			case "divide":
-				addOp("÷");
-				break;
-			case "multiply":
-				addOp("x");
-				break;
-			case "minus":
-				addOp("-");
-				break;
-			case "add":
-				addOp("+");
-				break;
-			case "equals":
-				eval();
-				break;
-			case "decimal":
-				addDecimal();
-				break;
+		if(!isNaN($(this).text())) {
+			addDigit(Number($(this).text()));
 		}
-
+		else if($(this).text() === ".") {
+			addDecimal();
+		}
+		else if($(this).text() === "AC") {
+			allClear();
+		}
+		else if($(this).text() === "CE") {
+			clearEntry();
+		}
+		else if($(this).text() === "=") {
+			eval();
+		}
+		else {
+			addOp($(this).text());
+		}
 	});
 }
 
