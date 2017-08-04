@@ -4,6 +4,14 @@ body {
 	color: #292D39;
 }
 
+h1 {
+	font-family: 'Orbitron', sans-serif;
+	color: #F6F9F8;
+	text-align: center;
+	margin-bottom: .5em;
+	margin-top: 0;
+}
+
 button {
 	height: 3em;
 	width: 100%;
