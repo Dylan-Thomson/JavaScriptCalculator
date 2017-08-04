@@ -18,14 +18,22 @@ button {
 	margin: 0.5em 0;
 
 	background: #9AA699;
-	color: #EEF2F4;
+	color: #F6F9F8;
 	border: none;
 	border-radius: 1em;
+	border-bottom: .25em solid #788876;
 }
 
-#ac, #ce {
-	background: #DF614F;
+button:active, button.active, #ac:active, #ac.active, #ce:active, #ce.active {
+	border-bottom: 0;
+	border-top: .25em solid #292D39;
+	outline: none;
 }
+
+button:hover, button:active, button.active, button:focus, button.focus, button:active:hover, button.active:hover {
+	outline: none;
+}
+
 
 input {
 	width: 100%;
@@ -86,6 +94,11 @@ a:hover, a:active {
 
 #equals {
 	height: 7em;
+}
+
+#ac, #ce {
+	background: #DF614F;
+	border-bottom: .25em solid #C83B28;
 }
 
 #output {
