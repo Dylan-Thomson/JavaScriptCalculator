@@ -152,20 +152,26 @@ function eval() {
 		var numbers = opChain.split(/[^0-9|.]/);
 		var operands = opChain.split(/[0-9|.]/).filter(function(el) {return el.length != 0});
 		var total = Number(numbers.shift());
-		for(var i = 0; i < operands.length; i++) {
-			switch(operands[i]) {
-				case "+":
-					total += Number(numbers[i]);
-					break;
-				case "-":
-					total -= Number(numbers[i]);
-					break;
-				case "x":
-					total *= Number(numbers[i]);
-					break;
-				case "÷":
-					total /= Number(numbers[i]);
-					break;
+		console.log(total);
+		if(isNaN(total)) {
+			total = 0;
+		}
+		if(numbers.indexOf(".") === -1) {
+			for(var i = 0; i < operands.length; i++) {
+				switch(operands[i]) {
+					case "+":
+						total += Number(numbers[i]);
+						break;
+					case "-":
+						total -= Number(numbers[i]);
+						break;
+					case "x":
+						total *= Number(numbers[i]);
+						break;
+					case "÷":
+						total /= Number(numbers[i]);
+						break;
+				}
 			}
 		}
 		displayOutput(Number(total.toFixed(5)).toString());
