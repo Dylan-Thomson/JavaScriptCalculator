@@ -1,7 +1,7 @@
 # Calculator
 Simple calculator app built using jQuery and JavaScript. It behaves like your standard non-scientific calculator, allowing you to chain operations before hitting `=` to get the result.
 
-I built this a while back for FreeCodeCamp but revisited it to add operator precedence. The calculator will now perform multiplication/division from left to right before doing subtraction. 
+I built this a while back for FreeCodeCamp but revisited it to add operator precedence. The calculator will now perform multiplication/division from left to right before doing addition and subtraction. 
 
 ## Future Updates
 * Update Bootstrap version from 3 to 4
