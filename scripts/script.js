@@ -3,28 +3,30 @@ $(function() {
 	initButtonListeners();
 });
 
-var opChain = "";
-var output = "";
+let opChain = "";
+let output = "";
 
 function initButtonListeners() {
 	$("button").click(function(event) {
-		if(!isNaN($(this).text())) {
-			addDigit(Number($(this).text()));
+		const buttonValue = $(this).data("value");
+
+		if(!isNaN(buttonValue)) {
+			addDigit(buttonValue);
 		}
-		else if($(this).text() === ".") {
+		else if(buttonValue === ".") {
 			addDecimal();
 		}
-		else if($(this).text() === "AC") {
+		else if(buttonValue === "ac") {
 			allClear();
 		}
-		else if($(this).text() === "CE") {
+		else if(buttonValue === "ce") {
 			clearEntry();
 		}
-		else if($(this).text() === "=") {
+		else if(buttonValue === "=") {
 			eval();
 		}
 		else {
-			addOp($(this).text());
+			addOp(buttonValue);
 		}
 	});
 }
@@ -40,7 +42,7 @@ function addDigit(value) {
 	}
 	else if(/[x÷+-]/.test(output)) {
 		output = "";
-		opChain += value;
+		opChain += " " + value;
 	}
 	else {
 		opChain += value;
@@ -60,7 +62,7 @@ function addOp(value) {
 	}
 	// Add operand if last digit is a number
 	if(/\d/.test(opChain[opChain.length - 1])) {
-		opChain += value;
+		opChain += " " + value;
 		displayOpChain();
 		displayOutput(value);
 	}
@@ -146,31 +148,90 @@ function displayOutput(value) {
 }
 
 // TODO if user hits equals multiple times, repeat last operation
-// TODO represent numbers like .000002 as 2E-7
+// TODO if last value is not a number, dont execute
 function eval() {
+	// Don't eval if current opchain has been evaluated
 	if(!/=/.test(opChain)) {
-		var numbers = opChain.split(/[^0-9|.]/);
-		var operands = opChain.split(/[0-9|.]/).filter(function(el) {return el.length != 0});
-		var total = Number(numbers.shift());
-		if(numbers.indexOf(".") === -1 && !isNaN(total)) {
-			for(var i = 0; i < operands.length; i++) {
-				switch(operands[i]) {
-					case "+":
-						total += Number(numbers[i]);
-						break;
-					case "-":
-						total -= Number(numbers[i]);
-						break;
-					case "x":
-						total *= Number(numbers[i]);
-						break;
-					case "÷":
-						total /= Number(numbers[i]);
-						break;
-				}
+		let ops = opChain.split(" ");
+		// Convert numbers in opchain to Numbers
+		ops = ops.map(op => !isNaN(op) ? Number(op) : op);
+		console.log(ops);
+
+		// Do multiplication and division first
+		while(ops.indexOf("x") >= 0 || ops.indexOf("÷") >= 0) {
+			if(ops.indexOf("÷") < 0) { // just multiplication
+				ops = multiply(ops);
 			}
-			displayOutput(Number(total.toFixed(5)).toString());
-			displayOpChain(Number(total.toFixed(5)).toString());
+			else if(ops.indexOf("x") < 0) { // just division
+				ops = divide(ops);
+			}
+			else if(ops.indexOf("x") < ops.indexOf("÷")) {  // multiplication left of division
+				ops = multiply(ops);
+			}
+			else { // division left of multiplication
+				ops = divide(ops);
+			}
 		}
+
+		// Do addition and subtraction
+		while(ops.indexOf("+") >= 0 || ops.indexOf("-") >= 0) {
+			if(ops.indexOf("-") < 0) { // just addition
+				ops = add(ops);
+			}
+			else if(ops.indexOf("+") < 0) { // just subtraction
+				ops = subtract(ops);
+			}
+			else if(ops.indexOf("+") < ops.indexOf("÷")) {  // addition left of subtraction
+				ops = add(ops);
+			}
+			else { // subtraction left of addition
+				ops = subtract(ops);
+			}
+		}
+		displayOutput(Number(ops[0].toFixed(5)).toString());
+		// displayOpChain(Number(ops[0].toFixed(5)).toString());
+		// 	displayOutput(Number(total.toFixed(5)).toString());
+		// 	displayOpChain(Number(total.toFixed(5)).toString());
+		// }
 	}
+}
+
+// Perform leftmost multiplication operation
+function multiply(ops) {
+	const num1 = ops[ops.indexOf("x") - 1];
+	const num2 = ops[ops.indexOf("x") + 1];
+	const result = num1 * num2;
+	console.log(num1, "x", num2, "=", result);
+	ops.splice(ops.indexOf("x")-1, 3, result);
+	return ops;
+}
+
+// Perform leftmost division operation
+function divide(ops) {
+	const num1 = ops[ops.indexOf("÷") - 1];
+	const num2 = ops[ops.indexOf("÷") + 1];
+	const result = num1 / num2;
+	console.log(num1, "÷", num2, "=", result);
+	ops.splice(ops.indexOf("÷")-1, 3, result);
+	return ops
+}
+
+// Perform leftmost addition operation
+function add(ops) {
+	const num1 = ops[ops.indexOf("+") - 1];
+	const num2 = ops[ops.indexOf("+") + 1];
+	const result = num1 + num2;
+	console.log(num1, "+", num2, "=", result);
+	ops.splice(ops.indexOf("+")-1, 3, result);
+	return ops;
+}
+
+// Perform leftmost subtraction operation
+function subtract(ops) {
+	const num1 = ops[ops.indexOf("-") - 1];
+	const num2 = ops[ops.indexOf("-") + 1];
+	const result = num1 - num2;
+	console.log(num1, "-", num2, "=", result);
+	ops.splice(ops.indexOf("-")-1, 3, result);
+	return ops;
 }
