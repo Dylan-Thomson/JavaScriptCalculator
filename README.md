@@ -3,6 +3,8 @@ Simple calculator app built using jQuery and JavaScript. It behaves like your st
 
 I built this a while back for FreeCodeCamp but revisited it to add operator precedence. The calculator will now perform multiplication/division from left to right before doing addition and subtraction. 
 
+[GitHub Page](https://dylan-thomson.github.io/JavaScriptCalculator/)
+
 ## Future Updates
 * Update Bootstrap version from 3 to 4
 * Update jQuery to latest stable release
